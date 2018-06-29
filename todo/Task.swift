@@ -9,15 +9,15 @@
 import Foundation
 
 class Task {
-    let task: String
-    let date: String
+    var task: String
+    var date: Date
+    var lifeCategory: String
     var isDone: Bool
     
-    init(task: String, date: String, isDone: Bool = false) {
+    init(task: String, date: Date, lifeCategory: String, isDone: Bool = false) {
         self.task = task
         self.date = date
+        self.lifeCategory = lifeCategory
         self.isDone = isDone
     }
-    
-    
 }

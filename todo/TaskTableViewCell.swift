@@ -10,15 +10,21 @@ import UIKit
 
 class TaskTableViewCell: UITableViewCell {
 
+    var taskRef: Task!
+    var delegate: TableViewCellDelegate!
     
     @IBOutlet weak var labelTask: UILabel!
     @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var imageViewLifeCategory: UIImageView!
     
     @IBOutlet weak var switchOutletState: UISwitch!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        tap.numberOfTapsRequired = 2
+        self.addGestureRecognizer(tap)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,7 +34,11 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     @IBAction func switchState(_ sender: UISwitch) {
-        
+        taskRef.isDone = !taskRef.isDone
+    }
+    
+    @objc func handleDoubleTap() {
+        delegate.tableViewCell(doubleTapActionDelegatedFrom: self)
     }
     
 }
